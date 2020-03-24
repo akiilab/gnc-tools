@@ -11,21 +11,23 @@ on run argv
   set toFile to (item 2 of argv)
 
   set base64File to do shell script "cat " & fromFile & " | base64 | fold -w 100000"
+  set md5 to do shell script "cat " & fromFile & " | md5sum | cut -d ' ' -f 1"
   set the_list to paragraphs of base64File
 
   -- -- Change to "Citrix Viewer" Window
   activate application "Citrix Viewer"
 
-  print("BX\n")
+  print("BCP\n")
   delay (random number from 1.0 to 1.0)
 
   repeat with the_row in the_list
     set the clipboard to the_row
     delay (random number from 0.3 to 0.3)
-    print("XX\n")
+    print("CCP\n")
+    delay (random number from 0.3 to 0.3)
   end repeat
 
   delay (random number from 1.0 to 1.0)
-  print("AX " & toFile & "\n")
+  print("ACP " & toFile & " " & md5 & "\n")
 end run
 
